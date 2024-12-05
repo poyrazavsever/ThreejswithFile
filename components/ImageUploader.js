@@ -28,10 +28,10 @@ const ImageUploader = () => {
 
       if (response.ok) {
         setUploadStatus('Yükleme başarılı!');
-        toast.success(uploadStatus)
+        toast.success(uploadStatus);
       } else {
-        toast.error(uploadStatus)
         setUploadStatus('Yükleme başarısız.');
+        toast.error(uploadStatus);
       }
     } catch (error) {
       console.error('Yükleme hatası:', error);
@@ -42,21 +42,33 @@ const ImageUploader = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-green-400">
       <div className="border-2 border-dashed border-green-400 rounded-lg p-8 flex flex-col items-center">
-        <AiOutlineCloudUpload size={48} className="text-green-400 mb-4" />
-        <label htmlFor="file-upload" className="cursor-pointer">
-          <span className="text-lg font-medium">Dosya yüklemek için tıklayın</span>
-        </label>
-        <input
-          id="file-upload"
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="hidden"
-        />
-        {selectedFile && (
-          <p className="mt-4 text-sm">
-            Seçilen dosya: <span className="font-bold">{selectedFile.name}</span>
-          </p>
+        {/* Eğer dosya seçilmemişse ikon ve yazılar görünür */}
+        {!selectedFile ? (
+          <>
+            <AiOutlineCloudUpload size={48} className="text-green-400 mb-4" />
+            <label htmlFor="file-upload" className="cursor-pointer">
+              <span className="text-lg font-medium">Dosya yüklemek için tıklayın</span>
+            </label>
+            <input
+              id="file-upload"
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="hidden"
+            />
+          </>
+        ) : (
+          // Dosya seçildiyse yalnızca önizleme ve dosya adı görünür
+          <div className="mt-4">
+            <img
+              src={URL.createObjectURL(selectedFile)}
+              alt="Preview"
+              className="max-w-full h-auto rounded-lg"
+            />
+            <p className="mt-2 text-sm text-center">
+              Seçilen dosya: <span className="font-bold">{selectedFile.name}</span>
+            </p>
+          </div>
         )}
       </div>
       <button
