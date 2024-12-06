@@ -40,7 +40,7 @@ const ImageUploader = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-green-400">
+    <div className="flex flex-col items-center justify-center text-green-400">
       <div className="border-2 border-dashed border-green-400 rounded-lg p-8 flex flex-col items-center">
         {/* Eğer dosya seçilmemişse ikon ve yazılar görünür */}
         {!selectedFile ? (
